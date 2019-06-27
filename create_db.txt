@@ -1,0 +1,64 @@
+CREATE TABLE `Activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `StudentID` int(11) NOT NULL,
+  `EventID` varchar(20) DEFAULT NULL,
+  `SecretKey` varchar(40) NOT NULL,
+  `Start` tinyint(1) DEFAULT NULL,
+  `Finish` tinyint(1) DEFAULT NULL,
+  `StartTime` time DEFAULT NULL,
+  `FinishTime` time DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `SecretKey` (`SecretKey`),
+  KEY `Activity_fk0` (`StudentID`),
+  CONSTRAINT `Activity_fk0` FOREIGN KEY (`StudentID`) REFERENCES `Students` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4507 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Day` date DEFAULT NULL,
+  `Info` text,
+  `Active` tinyint(1) NOT NULL,
+  `uID` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `uID` (`uID`)
+) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(255) NOT NULL,
+  `Description` text,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `Title` (`Title`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Letter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idVK` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `idVK` (`idVK`)
+) ENGINE=InnoDB AUTO_INCREMENT=4727 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `Students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Surname` varchar(40) NOT NULL,
+  `Name` varchar(20) NOT NULL,
+  `Group` varchar(10) DEFAULT NULL,
+  `Tutor` varchar(80) DEFAULT NULL,
+  `idVK` varchar(80) NOT NULL,
+  `Department` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `idVK` (`idVK`)
+) ENGINE=InnoDB AUTO_INCREMENT=1721 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `User_Event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `User_id` varchar(80) NOT NULL,
+  `Event` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1640 DEFAULT CHARSET=utf8;
